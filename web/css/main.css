@@ -1,0 +1,182 @@
+body{
+    margin: 0;
+}
+
+.header-bar {
+    width: 100%;
+    height: 60px;
+    background-color: blueviolet;
+    color: white;
+}
+
+.header-bar h1 {
+    margin-top: 0px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+.user-form {
+    padding: 10px;
+    width: 50%;
+    background-color: beige;
+    margin-left: 20%;
+    margin-top: 50px;
+    text-align: center;
+    border-style: dashed;
+}
+
+.user-form input{
+    border: 3em;
+    height: 30px;
+    background-color:khaki;
+    color: white;
+}
+.random-recipe{
+    width: 100%;
+    height: 200px;
+}
+
+.random-recipe li{
+    display: inline;
+}
+
+.random-recipe li{
+    float: left;
+    padding: 10px;
+    text-align: center;
+}
+
+.list-recipe {
+    float: left;
+    width: 20%;
+}
+
+.list-category-layout {
+    float: left;
+    width: 20%;
+}
+
+.list-recipes-layout {
+    width: 80%;
+    float: left;
+    background-color: aqua;
+    padding-bottom: 100px;
+}
+
+.list-recipes-layout ul li {
+    width: 180px;
+    float: left;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    list-style: none;
+}
+
+.list-recipes-layout ul li img{
+    width: 180px;
+    height: 150px;
+    float: left;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    list-style: none;
+}
+
+.list-recipes-layout ul li span{
+    font-size: 13px;
+}
+
+.detail-layout {
+    margin-top: 40px;
+    width: 70%;
+    float: left;
+    margin-left: 17%;
+    border: 3ex;
+    border-style: groove;
+    float: left;
+    padding-bottom: 50px;
+}
+
+.detail-layout h1 {
+    float: left;
+    padding: 10px;
+    width: 69%;
+}
+
+.detail-layout img {
+    float: left;
+    padding: 10px;
+}
+
+.detail-list li {
+    padding: 10px;
+}
+
+.detail-list {
+    margin-left: 10px;
+}
+
+.ingredients-layout { 
+    float: left;
+    width: 100%;
+}
+
+.ingredients {
+    /* width: 69%; */
+    padding: 10px;
+    height: 60px;
+    /* margin-left: 17%; */
+}
+
+.ingredients li {
+    width: 260px;
+    float: left;
+    margin:20px;
+    background-color: brown;
+    list-style: none;
+    padding: 10px;
+}
+
+.methods-layout {
+    float: left;
+    width: 100%;
+}
+
+#hidden-box ul li {
+    padding: 4px;
+    list-style: none;
+}
+
+.recommend-recipe {
+    width: 100%;
+}
+
+.recommend-recipe li{
+    width: 90%;
+    list-style: none;
+    height: 180px;
+    background-color: chocolate;
+}
+
+.recommend-recipe li img{
+    height: 130px;
+    padding: 5px;
+}
+
+.methods-layout {
+    float: left;
+}
+
+.nutrition-recipe {
+    width: 50%;
+    height: 50px;
+}
+.nutrition-recipe thead th {
+    width: 13%;
+}
+.btnChange {
+    height: 80px;
+    float: left;
+    margin: 10px;
+    margin-top: 20px;
+}

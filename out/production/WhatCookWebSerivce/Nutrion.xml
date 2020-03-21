@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="entity.Nutrion">
+        <table name="nutrion" schema="whatcook" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="ID" precision="11"/>
+            </id>
+            <basic name="calories">
+                <column name="CALORIES" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="fat">
+                <column name="FAT" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="fiber">
+                <column name="FIBER" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="protein">
+                <column name="PROTEIN" nullable="false" precision="-1"/>
+            </basic>
+            <basic name="carbs">
+                <column name="CARBS" nullable="false" precision="-1"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="JAX-RS" type="JAX-RS">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/jersey-bundle-1.19.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jersey-core-1.19.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jersey-server-1.19.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

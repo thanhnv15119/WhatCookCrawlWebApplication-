@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<title>What Cook Home Page</title>
+<header>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <script src="main.js"></script>
+</header>
+<body onload="initHomePage()">
+<div class="header-bar">
+    <h1>WhatCook?</h1>
+</div>
+<div class="user-form">
+    <h3>Let me give you some advice.</h3>
+    <div>Input Kcal for a meal</div>
+    <form action="findMealsServlet" method="get">
+        <input type="text" id="txtKcal" name="txtKcal"/>
+        Divide into:
+        <span id="cbMealsDivided">3</span> meal(s)
+        <br/>
+        <input type="hidden" id="mealNumber" name="mealNumber" value="3">
+        <button
+                type="submit"
+                id="btnFindMeals"
+        >Find Meals
+        </button>
+    </form>
+    <button value="+" onclick="increateNum()">+</button>
+    <button value="-" onclick="decreaseNum()">-</button>
+    <br/>
+    <input style="margin-top: 20px;" id="btnMore" type="button" onclick="handleMoreAdvanced()" value="More Advence>>"/>
+    <div style="display: none;" id="hidden-box">
+        <ul>
+            <li>
+                Your Gender: <input type="radio" id="rdMale" name="gender" value="Male"/>
+                <label for="rdMale">Male</label>
+                <input type="radio" id="rdFemale" name="gender" value="Female"/>
+                <label for="rdFemale">Female<label>
+            </li>
+            <li>
+                Height: <input type="text" name="txtHeight" id="txtHeight">
+            </li>
+            <li>
+                Weight: <input type="text" name="txtWeight" id="txtWeight"><br/>
+            </li>
+            <li>
+                Age: <input type="text" name="txtAge" id="txtAge"><br/>
+            </li>
+            <li>Activity Level:
+                <select name="activityLevel" id="activityLevel">
+                    <option value="sedentary">sedentary</option>
+                    <option value="sedentary">light active</option>
+                    <option value="sedentary">Moderately Active</option>
+                    <option value="sedentary">Very Active</option>
+                    <option value="sedentary">Extremely Active</option>
+                </select>
+            </li>
+            <li>Body Fat Percent: <input type="text" name="txtFatPercent" id="txtFatPercent">(*This will help a lot for
+                caculate. It's optional)
+            </li>
+            <li><input type="button" value="Caculate" id="caculate" onclick="handleCaculate()"></li>
+        </ul>
+    </div>
+</div>
+<!-- recomend -->
+<div>
+    <h3>You may like this</h3>
+    <ul class="random-recipe">
+        <li>
+            <a href="#">
+                <img
+                        width="150px"
+                        height="150px"
+                        src="/gfkids_maccheese.jpg"
+                /><br/>
+                <span>Title</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img
+                        width="150px"
+                        height="150px"
+                        src="/gfkids_maccheese.jpg"
+                /><br/>
+                <span>Title 1</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img
+                        width="150px"
+                        height="150px"
+                        src="/gfkids_maccheese.jpg"
+                /><br/>
+                <span>Title 1</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="list-category-layout">
+    <ul id="list-category">
+        <li>
+            <a>All</a>
+        </li>
+        <li>
+            <a>All</a>
+        </li>
+        <li>
+            <a>All</a>
+        </li>
+        <li>
+            <a>All</a>
+        </li>
+        <li>
+            <a>All</a>
+        </li>
+        <li>
+            <a>All</a>
+        </li>
+    </ul>
+</div>
+<div class="list-recipes-layout">
+    <ul id="list-recipes">
+        <li>
+            <a href="#">
+                <img
+                        width="150px"
+                        height="150px"
+                        src="/gfkids_maccheese.jpg"
+                /><br/>
+                <span>Title</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img
+                        width="150px"
+                        height="150px"
+                        src="/gfkids_maccheese.jpg"
+                /><br/>
+                <span>Title</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img
+                        width="150px"
+                        height="150px"
+                        src="/gfkids_maccheese.jpg"
+                /><br/>
+                <span>Title</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img
+                        width="150px"
+                        height="150px"
+                        src="/gfkids_maccheese.jpg"
+                /><br/>
+                <span>Title</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img
+                        width="150px"
+                        height="150px"
+                        src="/gfkids_maccheese.jpg"
+                /><br/>
+                <span>Title</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img
+                        width="150px"
+                        height="150px"
+                        src="/gfkids_maccheese.jpg"
+                /><br/>
+                <span>Title</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img
+                        width="150px"
+                        height="150px"
+                        src="/gfkids_maccheese.jpg"
+                /><br/>
+                <span>Title</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <img
+                        width="150px"
+                        height="150px"
+                        src="/gfkids_maccheese.jpg"
+                /><br/>
+                <span>Title</span>
+            </a>
+        </li>
+    </ul>
+</div>
+</body>
+<footer></footer>
+</html>

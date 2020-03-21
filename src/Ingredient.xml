@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="entity.Ingredient">
+        <table name="ingredient" schema="whatcook" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="ID" precision="11"/>
+            </id>
+            <basic name="content">
+                <column name="CONTENT" nullable="false" length="200"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>
