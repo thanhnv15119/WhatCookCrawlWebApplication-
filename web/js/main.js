@@ -59,8 +59,8 @@ function loadRandomList() {
         .item(1)
         .innerHTML.replace("&amp;amp;", "&&")
         .replace("&amp;#039;", "&");
-      imageElement.setAttribute("width", "150px");
-      imageElement.setAttribute("height", "180px");
+      imageElement.setAttribute("width", "200px");
+      imageElement.setAttribute("height", "150px");
       imageElement.setAttribute("src", value.childNodes.item(2).innerHTML);
       aElement.appendChild(imageElement);
       aElement.appendChild(spanElement);
@@ -103,14 +103,15 @@ function loadRecipes() {
 }
 
 function inputRecipesData(res) {
-  var list = document.getElementById("list-recipes");
+  var list = document.getElementsByClassName("list-recipes-layout").item(0);
   list.innerHTML = "";
   var rootNode = res.childNodes.item(0).childNodes;
   rootNode.forEach(value => {
-    var liElement = document.createElement("li");
+    var liElement = document.createElement("div");
+    liElement.setAttribute("class", "recipe-card");
     var aElement = document.createElement("a");
     var imageElement = document.createElement("img");
-    imageElement.setAttribute("width", "150px");
+    imageElement.setAttribute("width", "190px");
     imageElement.setAttribute("height", "180px");
     var spanElement = document.createElement("span");
     spanElement.innerText = value.childNodes

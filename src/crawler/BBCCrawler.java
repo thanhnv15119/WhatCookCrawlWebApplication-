@@ -21,6 +21,7 @@ import utils.XmlValidate;
 import javax.xml.bind.JAXBException;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.XMLEvent;
 import javax.xml.transform.TransformerException;
@@ -31,6 +32,7 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +44,10 @@ public class BBCCrawler {
 
     public void startCrawling() throws IOException, XMLStreamException {
         CategoryDAO categoryDAO = new CategoryDAO();
-        Map<String, String> mapCollections = getBBCCollections();
+        Map<String, String> mapCollections = new HashMap<>();
+        for (String link: getBBCCollectionLinks()) {
+            mapCollections.putAll(getBBCCollections(link));
+        }
         for (Map.Entry entry : mapCollections.entrySet()) {
             categoryDAO.save(new Category(entry.getKey().toString()));
             final Category newCatogery = categoryDAO.findByName(entry.getKey().toString());
@@ -67,12 +72,35 @@ public class BBCCrawler {
         }
     }
 
-    public Map<String, String> getBBCCollections() throws IOException, XMLStreamException {
+    public List<String> getBBCCollectionLinks() throws IOException, XMLStreamException {
+        List<String> rs = new ArrayList<>();
+        XmlHelper helper = new XmlHelper();
+        String doc = helper.parseBBCHtml(AppConstant.BBCGOODFOOD_ROOT);
+        doc = helper.getCollectionsPath(doc);
+        XMLInputFactory factory = XMLInputFactory.newInstance();
+        factory.setProperty(XMLInputFactory.IS_REPLACING_ENTITY_REFERENCES, false);
+        factory.setProperty(XMLInputFactory.IS_VALIDATING, false);
+
+        XMLEventReader reader = factory.createXMLEventReader(new ByteArrayInputStream(doc.getBytes("UTF-8")));
+        while (reader.hasNext()) {
+            XMLEvent event = (XMLEvent) reader.next();
+            if(event.isStartElement() ) {
+                if(event.asStartElement().getName().toString().equals("a")) {
+                    String url =event.asStartElement().getAttributeByName(new QName("href")).getValue();
+                    if (url.contains("/recipes/category") && !url.contains("https://www.bbcgoodfood.com/") && !rs.contains(url) ) {
+                        rs.add(url);
+                    }
+                }
+            }
+        }
+        return rs;
+    }
+
+    public Map<String, String> getBBCCollections(String collectionLink) throws IOException, XMLStreamException {
         Map<String, String> result = new HashMap<>();
         XmlHelper xmlHelper = new XmlHelper();
-        String doc = xmlHelper.parseBBCHtml(AppConstant.BBCGOODFOOD_);
+        String doc = xmlHelper.parseBBCHtml(AppConstant.BBCGOODFOOD_ROOT+collectionLink);
         doc = xmlHelper.BBCCollectionsWellformFixer(doc);
-        File file = new File("test.html");
         StaxParser parser = new StaxParser();
         XMLEventReader reader = parser.parserXMLtoEventReader(doc);
 
