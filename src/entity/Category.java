@@ -24,7 +24,7 @@ import java.util.Objects;
 @Table(name = "CATEGORY")
 @NamedQueries({
        @NamedQuery(name = "Category.findByName", query="SELECT C FROM Category C WHERE C.name = :name "),
-        @NamedQuery(name = "Category.findAll", query="SELECT C FROM Category C"),
+        @NamedQuery(name = "Category.findAll", query="SELECT DISTINCT C FROM Category C JOIN Recipe R WHERE R.category IS NOT NULL"),
 })
 public class Category implements Serializable {
 

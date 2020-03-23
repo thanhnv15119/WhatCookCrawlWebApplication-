@@ -45,29 +45,33 @@ public class BBCCrawler {
     public void startCrawling() throws IOException, XMLStreamException {
         CategoryDAO categoryDAO = new CategoryDAO();
         Map<String, String> mapCollections = new HashMap<>();
-        for (String link: getBBCCollectionLinks()) {
+        for (String link : getBBCCollectionLinks()) {
             mapCollections.putAll(getBBCCollections(link));
         }
         for (Map.Entry entry : mapCollections.entrySet()) {
             categoryDAO.save(new Category(entry.getKey().toString()));
             final Category newCatogery = categoryDAO.findByName(entry.getKey().toString());
-            Map<String, String> recipesLink = getRecipesLinkByCollections(entry.getValue().toString());
-            for (Map.Entry item : recipesLink.entrySet()) {
-                Thread t = new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            getRecipeByLink(item.getValue().toString(), newCatogery);
-                        } catch (IOException e) {
-                            System.out.println("getRecipeByLink ERROR:" + e.getMessage());
-                        } catch (TransformerException e) {
-                            System.out.println("getRecipeByLink ERROR:" + e.getMessage());
-                        } catch (JAXBException e) {
-                            System.out.println("getRecipeByLink ERROR:" + e.getMessage());
+            try {
+                Map<String, String> recipesLink = getRecipesLinkByCollections(entry.getValue().toString());
+                for (Map.Entry item : recipesLink.entrySet()) {
+                    Thread t = new Thread() {
+                        @Override
+                        public void run() {
+                            try {
+                                getRecipeByLink(item.getValue().toString(), newCatogery);
+                            } catch (IOException e) {
+                                System.out.println("getRecipeByLink ERROR:" + e.getMessage());
+                            } catch (TransformerException e) {
+                                System.out.println("getRecipeByLink ERROR:" + e.getMessage());
+                            } catch (JAXBException e) {
+                                System.out.println("getRecipeByLink ERROR:" + e.getMessage());
+                            }
                         }
-                    }
-                };
-                t.start();
+                    };
+                    t.start();
+                }
+            } catch (Exception e) {
+                System.out.println( e.getMessage());
             }
         }
     }
@@ -84,10 +88,10 @@ public class BBCCrawler {
         XMLEventReader reader = factory.createXMLEventReader(new ByteArrayInputStream(doc.getBytes("UTF-8")));
         while (reader.hasNext()) {
             XMLEvent event = (XMLEvent) reader.next();
-            if(event.isStartElement() ) {
-                if(event.asStartElement().getName().toString().equals("a")) {
-                    String url =event.asStartElement().getAttributeByName(new QName("href")).getValue();
-                    if (url.contains("/recipes/category") && !url.contains("https://www.bbcgoodfood.com/") && !rs.contains(url) ) {
+            if (event.isStartElement()) {
+                if (event.asStartElement().getName().toString().equals("a")) {
+                    String url = event.asStartElement().getAttributeByName(new QName("href")).getValue();
+                    if (url.contains("/recipes/category") && !url.contains("https://www.bbcgoodfood.com/") && !rs.contains(url)) {
                         rs.add(url);
                     }
                 }
@@ -99,7 +103,7 @@ public class BBCCrawler {
     public Map<String, String> getBBCCollections(String collectionLink) throws IOException, XMLStreamException {
         Map<String, String> result = new HashMap<>();
         XmlHelper xmlHelper = new XmlHelper();
-        String doc = xmlHelper.parseBBCHtml(AppConstant.BBCGOODFOOD_ROOT+collectionLink);
+        String doc = xmlHelper.parseBBCHtml(AppConstant.BBCGOODFOOD_ROOT + collectionLink);
         doc = xmlHelper.BBCCollectionsWellformFixer(doc);
         StaxParser parser = new StaxParser();
         XMLEventReader reader = parser.parserXMLtoEventReader(doc);

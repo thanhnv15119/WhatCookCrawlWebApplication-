@@ -23,27 +23,25 @@
         <li>Prep Time: ${RecipeDTO.prepTime} mins</li>
         <li>Cook Time: ${RecipeDTO.cookTime} mins</li>
         <li>${RecipeDTO.yeild}</li>
-        <li>
-            <table>
-                <thead>
-                <th>Kcal</th>
-                <th>Proteins</th>
-                <th>Carbs</th>
-                <th>Fiber</th>
-                <th>Fat</th>
-                </thead>
-                <tr>
-                    <td>${RecipeDTO.nutrion.calories}</td>
-                    <td>${RecipeDTO.nutrion.protein}</td>
-                    <td>${RecipeDTO.nutrion.carbs}</td>
-                    <td>${RecipeDTO.nutrion.fiber}</td>
-                    <td>${RecipeDTO.nutrion.fat}</td>
-                </tr>
-            </table>
-        </li>
-
     </ul>
+    <table id="nutrition-detail">
+        <thead>
+        <th>Kcal</th>
+        <th>Proteins</th>
+        <th>Carbs</th>
+        <th>Fiber</th>
+        <th>Fat</th>
+        </thead>
+        <tr>
+            <td>${RecipeDTO.nutrion.calories}</td>
+            <td>${RecipeDTO.nutrion.protein}</td>
+            <td>${RecipeDTO.nutrion.carbs}</td>
+            <td>${RecipeDTO.nutrion.fiber}</td>
+            <td>${RecipeDTO.nutrion.fat}</td>
+        </tr>
+    </table>
     <div class="ingredients-layout">
+        <h2 style="margin-left: 10px;">Ingredients</h2>
         <ul class="ingredients">
             <c:forEach items="${RecipeDTO.ingredients}" var="ingredient">
                 <li>${ingredient.content}</li>
@@ -51,6 +49,7 @@
         </ul>
     </div>
     <div class="methods-layout">
+        <h2>Methods</h2>
         <ul>
             <c:forEach items="${RecipeDTO.methods}" var="method">
                 <li>

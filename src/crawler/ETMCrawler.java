@@ -15,6 +15,7 @@ import utils.AppConstant;
 import utils.JAXBHelper;
 import utils.TrAxUtils;
 import utils.XmlHelper;
+import utils.XmlValidate;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.namespace.QName;
@@ -152,10 +153,10 @@ public class ETMCrawler {
                                     XPath xPath = factory.newXPath();
                                     String exp = "/recipe";
                                     Node root = (Node) xPath.evaluate(exp, newDoc, XPathConstants.NODE);
-                                    Element prepTimeEle = newDoc.createElement(AppConstant.ETM_PREPTIME);
+                                    Element prepTimeEle = newDoc.createElement("prepTime");
                                     prepTimeEle.setTextContent(prepTime);
 
-                                    Element cookTimeEle = newDoc.createElement(AppConstant.ETM_COOKTIME);
+                                    Element cookTimeEle = newDoc.createElement("cookTime");
                                     cookTimeEle.setTextContent(cookTime);
 
                                     Element methodsEle = newDoc.createElement("methods");
@@ -186,10 +187,17 @@ public class ETMCrawler {
                                     }
                                     String xmlContent = TrAxUtils.transform(root);
                                     JAXBHelper jaxbHelper = new JAXBHelper();
-                                    RecipeType recipeType = jaxbHelper.xmlRecipeToObject(xmlContent.getBytes("UTF-8"));
-                                    RecipeDAO recipeDAO = new RecipeDAO();
-                                    recipeDAO.insertRecipeType(recipeType, category);
-                                    System.out.println("DONE");
+                                    XmlValidate xmlValidate = new XmlValidate();
+                                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream(xmlContent.getBytes("UTF-8").length);
+                                    outputStream.write(xmlContent.getBytes("UTF-8"),0,xmlContent.getBytes("UTF-8").length);
+                                    if(xmlValidate.validateXMLSchema(AppConstant.RECIPE_XSD_PATH, outputStream)) {
+                                        RecipeType recipeType = jaxbHelper.xmlRecipeToObject(xmlContent.getBytes("UTF-8"));
+                                        RecipeDAO recipeDAO = new RecipeDAO();
+                                        recipeDAO.insertRecipeType(recipeType, category);
+                                        System.out.println("DONE");
+                                    } else {
+                                        System.out.println("NOT VALID");
+                                    }
                                 } catch (IOException | JAXBException e) {
                                     System.out.println(e.getMessage());
                                 } catch (SAXException | ParserConfigurationException | org.xml.sax.SAXException | XPathExpressionException | TransformerException e) {
@@ -225,22 +233,18 @@ public class ETMCrawler {
         int begin = doc.indexOf(AppConstant.ETM_COOKTIME) + AppConstant.ETM_COOKTIME.length() + 3;
         int end = doc.indexOf(AppConstant.ETM_CURATED) - 2;
         if ((begin - AppConstant.ETM_COOKTIME.length() - 3) != -1 && end != -3) {
-            result = doc.substring(begin, end);
+            result = doc.substring(begin, end).replaceAll("\\D", "");
         }
         return result;
     }
 
     public String getPrepareTime(String doc) throws IOException {
-        File file = new File("test.json");
-        FileWriter writer = new FileWriter(file);
-        writer.write(doc);
-        writer.close();
         String result = null;
-        doc = doc.substring(doc.indexOf("nutrition"));
+        doc = doc.substring(doc.lastIndexOf("nutrition"));
         int begin = doc.indexOf(AppConstant.ETM_PREPTIME) + AppConstant.ETM_PREPTIME.length() + 3;
         int end = doc.indexOf(AppConstant.ETM_RESOURCE_URI) - 2;
         if ((begin - AppConstant.ETM_PREPTIME.length() - 3) != -1 && end != -3) {
-            result = doc.substring(begin, end);
+            result = doc.substring(begin, end).replaceAll("\\D", "");
         }
         return result;
     }

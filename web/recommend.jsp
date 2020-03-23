@@ -26,7 +26,7 @@
     <ul class="recommend-recipe">
         <c:forEach items="${recipeList}" var="item" varStatus="count">
             <li id="M${count.index}">
-                <h3>1st Meal</h3>
+                <h3>${count.index + 1}th Meal</h3>
                 <div class="meal-layout">
                     <a href="recipe?recipeId=${item.id}">
 
@@ -51,7 +51,7 @@
                         </div>
                     </a>
 
-                    <input type="button" value="btnChange" class="btnChange" onclick="changeRecipe('M${count.index}')">
+                    <input type="button" value="Change" class="btnChange" onclick="changeRecipe('M${count.index}')">
                 </div>
             </li>
         </c:forEach>

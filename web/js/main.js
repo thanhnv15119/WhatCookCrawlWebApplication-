@@ -57,7 +57,7 @@ function loadRandomList() {
       aElement.setAttribute("href", url);
       spanElement.innerText = value.childNodes
         .item(1)
-        .innerHTML.replace("&amp;amp;", "&&")
+        .innerHTML.replace("&amp;amp;", "&&").replace("&amp;","")
         .replace("&amp;#039;", "&");
       imageElement.setAttribute("width", "200px");
       imageElement.setAttribute("height", "150px");
@@ -257,13 +257,15 @@ function changeRecipe(elementId) {
     var rootNode = rs.childNodes.item(0).childNodes;
     imgRecipe.src = rootNode.item(2).innerHTML;
     let title = elment.children.item(1);
-    title.innerHTML = rootNode.item(1).innerHTML
+    title.innerHTML = rootNode.item(1).innerHTML.replace('&amp;amp;', '&&').replace('&amp;','&')
+        .replace('&amp;#039;', '&');
     let bodytable = elment.getElementsByClassName("nutrition-recipe").item(0).children.item(1).children.item(0).children;
     bodytable.item(0).innerHTML = rootNode.item(3).childNodes.item(0).innerHTML;
     bodytable.item(1).innerHTML = rootNode.item(3).childNodes.item(3).innerHTML;
     bodytable.item(2).innerHTML = rootNode.item(3).childNodes.item(1).innerHTML;
     bodytable.item(3).innerHTML = rootNode.item(3).childNodes.item(4).innerHTML;
     bodytable.item(4).innerHTML = rootNode.item(3).childNodes.item(2).innerHTML;
-
+    let aElement = document.getElementById(elementId).children.item(1).children.item(0);
+    aElement.href= 'recipe?recipeId='+rootNode.item(0).innerHTML;
   })
 }

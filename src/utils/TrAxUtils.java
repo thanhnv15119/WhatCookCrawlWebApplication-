@@ -30,38 +30,6 @@ public class TrAxUtils {
         return tf;
     }
 
-
-
-    public static ByteArrayOutputStream transform(String xmlPath, String xslPath)
-            throws FileNotFoundException, TransformerConfigurationException, TransformerException {
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
-        TransformerFactory factory = getTransformerFactory();
-
-        StreamSource source = new StreamSource(new FileInputStream(xmlPath));
-        StreamResult result = new StreamResult(outputStream);
-
-        Transformer trans = factory.newTransformer(new StreamSource(new File(xslPath)));
-        trans.transform(source, result);
-
-        return outputStream;
-    }
-
-    public static ByteArrayOutputStream transform(InputStream xmlIs, Templates template)
-            throws FileNotFoundException, TransformerConfigurationException, TransformerException {
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
-        StreamSource source = new StreamSource(xmlIs);
-        StreamResult result = new StreamResult(outputStream);
-
-        Transformer trans = template.newTransformer();
-        trans.transform(source, result);
-
-        return outputStream;
-    }
-
     public static ByteArrayOutputStream transform(InputStream xmlIs, String xslPath)
             throws FileNotFoundException, TransformerConfigurationException, TransformerException {
 

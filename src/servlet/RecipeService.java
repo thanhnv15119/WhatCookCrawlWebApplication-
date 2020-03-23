@@ -25,7 +25,7 @@ public class RecipeService {
             @DefaultValue("-1") @QueryParam("page") int page,
             @DefaultValue("20") @QueryParam("size") int size,
             @DefaultValue("false") @QueryParam("random") boolean random,
-            @DefaultValue("-1") @QueryParam("kcal") int kcal,
+            @DefaultValue("-1") @QueryParam("kcal") float kcal,
             @DefaultValue("-1") @QueryParam("mealNumber") int mealNumber
     ) {
         RecipeDAO recipeDAO = new RecipeDAO();
@@ -60,7 +60,7 @@ public class RecipeService {
     @Path("/kcal")
     @Produces({MediaType.APPLICATION_XML})
     public RecipeTitleDTO findRandomOneByKcal(
-            @DefaultValue("0") @QueryParam("kcal") int kcal,
+            @DefaultValue("0") @QueryParam("kcal") float kcal,
             @DefaultValue("0") @QueryParam("mealNumber") int mealNumber
     ) {
         if (kcal == 0 || mealNumber == 0) {

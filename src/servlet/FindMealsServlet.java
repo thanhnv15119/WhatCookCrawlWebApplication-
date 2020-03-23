@@ -27,7 +27,7 @@ public class FindMealsServlet extends HttpServlet {
         String kcalStr = request.getParameter("txtKcal");
         String mealNumberStr = request.getParameter("mealNumber");
         if (kcalStr != null && mealNumberStr!= null) {
-            int kcal = Integer.parseInt(kcalStr);
+            float kcal = Float.parseFloat(kcalStr);
             int mealNumber = Integer.parseInt(mealNumberStr);
             RecipeDAO recipeDAO = new RecipeDAO();
             List<Recipe> recipeList = recipeDAO.findByKcal(kcal/mealNumber,mealNumber);
