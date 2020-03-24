@@ -1,5 +1,7 @@
 package entity;
 
+import jaxb.IngredientsType;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

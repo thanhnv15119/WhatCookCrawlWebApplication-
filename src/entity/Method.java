@@ -1,5 +1,7 @@
 package entity;
 
+import jaxb.MethodType;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -72,6 +74,13 @@ public class Method {
         return id == method.id &&
                 Objects.equals(step, method.step) &&
                 Objects.equals(content, method.content);
+    }
+
+    public MethodType toMethodType() {
+        MethodType methodType = new MethodType();
+        methodType.setStep(this.step);
+        methodType.setContent(this.content);
+        return methodType;
     }
 
     @Override

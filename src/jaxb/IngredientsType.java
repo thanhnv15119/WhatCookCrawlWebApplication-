@@ -80,4 +80,8 @@ public class IngredientsType {
         return rs;
     }
 
+    public void setIngredient(List<String> ingredients) {
+        this.ingredient = ingredients;
+    }
+
 }
