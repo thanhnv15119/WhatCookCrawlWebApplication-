@@ -20,7 +20,7 @@ public class RecipeDAO extends BaseDAO<Recipe, Integer> {
     public RecipeDAO() {
     }
 
-    public List<Recipe> findByKcal(int kcal, int mealsNumber) {
+    public List<Recipe> findByKcal(float kcal, int mealsNumber) {
         EntityManager em = DBUtils.getEntityManager();
         List<Recipe> rs = null;
         try {

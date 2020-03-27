@@ -93,7 +93,18 @@
                                     test="/div/article/header/div[contains(@class, 'recipe-header__details')]/div[contains(@class, 'recipe-header__details-second')]/div/section[contains(@class, 'recipe-details__item recipe-details__item--cooking-time')]/div/span[contains(@class,'recipe-details__cooking-time-prep')]/span[contains(@class,'mins')]">
                                 <xsl:variable name="time"
                                               select="/div/article/header/div[contains(@class, 'recipe-header__details')]/div[contains(@class, 'recipe-header__details-second')]/div/section[contains(@class, 'recipe-details__item recipe-details__item--cooking-time')]/div/span[contains(@class,'recipe-details__cooking-time-prep')]/span[contains(@class,'mins')]/text()"/>
-                                <xsl:value-of select="translate($time, 'mins','')"/>
+                                <xsl:variable name="timeHrs"
+                                              select="/div/article/header/div[contains(@class, 'recipe-header__details')]/div[contains(@class, 'recipe-header__details-second')]/div/section[contains(@class, 'recipe-details__item recipe-details__item--cooking-time')]/div/span[contains(@class,'recipe-details__cooking-time-prep')]/span[contains(@class,'hrs')]/text()"/>
+                                <xsl:choose>
+                                    <xsl:when test="$timeHrs">
+                                        <xsl:variable name="mins1" select="translate($timeHrs, 'hrs','') * 60 "/>
+                                        <xsl:variable name="mins2" select="translate($time, 'mins','')"/>
+                                        <xsl:value-of select="$mins1+ number($mins2)"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="translate($time, 'mins','')"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:variable name="time"
@@ -115,7 +126,18 @@
                                     test="/div/article/header/div[contains(@class, 'recipe-header__details')]/div[contains(@class, 'recipe-header__details-second')]/div/section[contains(@class, 'recipe-details__item recipe-details__item--cooking-time')]/div/span[contains(@class,'recipe-details__cooking-time-cook')]/span[contains(@class,'mins')]">
                                 <xsl:variable name="time"
                                               select="/div/article/header/div[contains(@class, 'recipe-header__details')]/div[contains(@class, 'recipe-header__details-second')]/div/section[contains(@class, 'recipe-details__item recipe-details__item--cooking-time')]/div/span[contains(@class,'recipe-details__cooking-time-cook')]/span[contains(@class,'mins')]/text()"/>
-                                <xsl:value-of select="translate($time, 'mins','')"/>
+                                <xsl:variable name="timeHrs"
+                                              select="/div/article/header/div[contains(@class, 'recipe-header__details')]/div[contains(@class, 'recipe-header__details-second')]/div/section[contains(@class, 'recipe-details__item recipe-details__item--cooking-time')]/div/span[contains(@class,'recipe-details__cooking-time-cook')]/span[contains(@class,'hrs')]/text()"/>
+                                <xsl:choose>
+                                    <xsl:when test="$timeHrs">
+                                        <xsl:variable name="mins1" select="translate($timeHrs, 'hrs','') * 60 "/>
+                                        <xsl:variable name="mins2" select="translate($time, 'mins','')"/>
+                                        <xsl:value-of select="$mins1+ number($mins2)"/>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <xsl:value-of select="translate($time, 'mins','')"/>
+                                    </xsl:otherwise>
+                                </xsl:choose>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:variable name="time"

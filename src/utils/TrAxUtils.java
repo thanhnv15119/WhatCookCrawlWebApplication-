@@ -1,17 +1,12 @@
 package utils;
 
+import jaxb.RecipeType;
 import org.w3c.dom.Node;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.StringWriter;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Result;
-import javax.xml.transform.Source;
-import javax.xml.transform.Templates;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -19,6 +14,13 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.StringWriter;
 
 public class TrAxUtils {
     public static TransformerFactory tf = null;
@@ -28,38 +30,6 @@ public class TrAxUtils {
             tf = TransformerFactory.newInstance();
         }
         return tf;
-    }
-
-
-
-    public static ByteArrayOutputStream transform(String xmlPath, String xslPath)
-            throws FileNotFoundException, TransformerConfigurationException, TransformerException {
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
-        TransformerFactory factory = getTransformerFactory();
-
-        StreamSource source = new StreamSource(new FileInputStream(xmlPath));
-        StreamResult result = new StreamResult(outputStream);
-
-        Transformer trans = factory.newTransformer(new StreamSource(new File(xslPath)));
-        trans.transform(source, result);
-
-        return outputStream;
-    }
-
-    public static ByteArrayOutputStream transform(InputStream xmlIs, Templates template)
-            throws FileNotFoundException, TransformerConfigurationException, TransformerException {
-
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
-        StreamSource source = new StreamSource(xmlIs);
-        StreamResult result = new StreamResult(outputStream);
-
-        Transformer trans = template.newTransformer();
-        trans.transform(source, result);
-
-        return outputStream;
     }
 
     public static ByteArrayOutputStream transform(InputStream xmlIs, String xslPath)
@@ -86,4 +56,20 @@ public class TrAxUtils {
         t.transform(new DOMSource(node), new StreamResult(sw));
         return sw.toString();
     }
+
+    public static ByteArrayOutputStream marshalRecipeDetail(RecipeType recipeType) {
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        try {
+            JAXBContext ctx = JAXBContext.newInstance(RecipeType.class);
+            Marshaller mar = ctx.createMarshaller();
+            mar.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+            mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+//            mar.marshal(recipeType, new File("recipeDetail.xml"));
+            mar.marshal(recipeType, os);
+        } catch (JAXBException e) {
+            System.out.println("marshalRecipeDetail ERROR: " + e.getMessage());
+        }
+        return os;
+    }
+
 }

@@ -28,6 +28,7 @@ public class XmlHelper {
         yc.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
         yc.setConnectTimeout(35000);
         yc.setReadTimeout(15000);
+        System.out.println(uri);
         InputStream rs = yc.getInputStream();
         BufferedReader in = new BufferedReader(new InputStreamReader(rs, "UTF-8"));
         String line = "";
@@ -149,4 +150,8 @@ public class XmlHelper {
         return doc;
     }
 
+    public String getCollectionsPath(String doc) {
+        String rs = doc.substring(doc.indexOf(AppConstant.BBC_HOME_BEGIN_SYNTAX), doc.indexOf(AppConstant.BBC_HOME_END_SYNTAX));
+        return rs;
+    }
 }

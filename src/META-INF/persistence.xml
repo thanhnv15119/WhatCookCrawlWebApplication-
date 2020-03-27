@@ -14,6 +14,7 @@
         <class>entity.Nutrion</class>
         <class>entity.Recipe</class>
         <properties>
+            <property name="show_sql" value="true"/>
             <property name="hibernate.connection.autocommit" value="false"/>
             <property name="eclipselink.allow-zero-id" value="true"/>
             <property name="eclipselink.jdbc.url" value="jdbc:mysql://localhost:3306/whatcook"/>

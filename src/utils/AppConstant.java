@@ -23,6 +23,10 @@ public class AppConstant {
     //BBC GOOD FOOD CONSTANTS
     public final static String BBCGOODFOOD_ROOT = "https://www.bbcgoodfood.com";
     public final static String BBCGOODFOOD_ = "https://www.bbcgoodfood.com/recipes/category/everyday";
+    public final static String BBCGOODFOOD_2 = "https://www.bbcgoodfood.com/recipes/category/dishes";
+    public final static String BBC_HOME_BEGIN_SYNTAX = "<li class=\"expanded link-level-1 item-2 left-nav-info is-activ";
+    public final static String BBC_HOME_END_SYNTAX = "<li class=\"expanded link-level-1 item-3 right-nav-info\"";
+
     public final static String BBC_COLLECTION_BEGIN_SYNTAX = "<div class=\"view-content\">";
     public final static String BBC_COLLECTION_END_SYNTAX = "<aside class=\"col span4\">";
     public final static String BBC_RECIPES_BEGIN_SYNTAX = "<div class=\"view view-collection";

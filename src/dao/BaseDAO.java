@@ -51,38 +51,6 @@ public class BaseDAO<T, PK extends Serializable> {
         }
     }
 
-    public T update(T t) {
-        EntityManager manager = DBUtils.getEntityManager();
-        try {
-            EntityTransaction transaction = manager.getTransaction();
-            transaction.begin();
-            manager.merge(t);
-            manager.flush();
-            transaction.commit();
-            return t;
-        } finally {
-            if (manager != null) {
-                manager.close();
-            }
-        }
-    }
-
-    public boolean delete(T t) {
-        EntityManager manager = DBUtils.getEntityManager();
-        try {
-            EntityTransaction transaction = manager.getTransaction();
-            transaction.begin();
-            manager.remove(t);
-            manager.flush();
-            transaction.commit();
-            return true;
-        } finally {
-            if (manager != null) {
-                manager.close();
-            }
-        }
-    }
-
     public T findByID(PK id) {
         EntityManager manager = DBUtils.getEntityManager();
         try {

@@ -13,7 +13,7 @@
     <h3>Let me give you some advice.</h3>
     <div>Input Kcal for a meal</div>
     <form action="findMealsServlet" method="get">
-        <input type="text" id="txtKcal" name="txtKcal"/>
+        <input type="text" id="txtKcal" name="txtKcal"/>Kcal<br/>
         Divide into:
         <span id="cbMealsDivided">3</span> meal(s)
         <br/>
@@ -37,10 +37,10 @@
                 <label for="rdFemale">Female<label>
             </li>
             <li>
-                Height: <input type="text" name="txtHeight" id="txtHeight">
+                Height: <input type="text" name="txtHeight" id="txtHeight"> cm
             </li>
             <li>
-                Weight: <input type="text" name="txtWeight" id="txtWeight"><br/>
+                Weight: <input type="text" name="txtWeight" id="txtWeight"> kg<br/>
             </li>
             <li>
                 Age: <input type="text" name="txtAge" id="txtAge"><br/>
@@ -97,7 +97,9 @@
         </li>
     </ul>
 </div>
+<div style="width: 100%; float: left;">
 <div class="list-category-layout">
+    <h2>Category</h2>
     <ul id="list-category">
         <li>
             <a>All</a>
@@ -119,6 +121,7 @@
         </li>
     </ul>
 </div>
+
 <div class="list-recipes-layout">
     <ul id="list-recipes">
         <li>
@@ -202,6 +205,7 @@
             </a>
         </li>
     </ul>
+</div>
 </div>
 </body>
 <footer></footer>

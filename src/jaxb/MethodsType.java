@@ -81,5 +81,7 @@ public class MethodsType {
         return rs;
     }
 
-
+    public void setMethod(List<MethodType> method) {
+        this.method = method;
+    }
 }

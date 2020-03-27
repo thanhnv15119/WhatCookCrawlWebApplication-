@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
 <%--
   Created by IntelliJ IDEA.
   User: thanhnv
@@ -17,47 +18,47 @@
     <h1>WhatCook?</h1>
 </div>
 <div class="detail-layout">
-    <img src="${RecipeDTO.img}" width="250px"/>
-    <h1>${RecipeDTO.name}</h1>
+    <x:parse xml="${RecipeXml}" var="recipeXML"/>
+    <img src="<x:out select="$recipeXML/recipe/image"/>" width="250px"/>
+    <h1><x:out select="$recipeXML/recipe/name"/></h1>
     <ul class="detail-list">
-        <li>Prep Time: ${RecipeDTO.prepTime} mins</li>
-        <li>Cook Time: ${RecipeDTO.cookTime} mins</li>
-        <li>${RecipeDTO.yeild}</li>
-        <li>
-            <table>
-                <thead>
-                <th>Kcal</th>
-                <th>Proteins</th>
-                <th>Carbs</th>
-                <th>Fiber</th>
-                <th>Fat</th>
-                </thead>
-                <tr>
-                    <td>${RecipeDTO.nutrion.calories}</td>
-                    <td>${RecipeDTO.nutrion.protein}</td>
-                    <td>${RecipeDTO.nutrion.carbs}</td>
-                    <td>${RecipeDTO.nutrion.fiber}</td>
-                    <td>${RecipeDTO.nutrion.fat}</td>
-                </tr>
-            </table>
-        </li>
-
+        <li>Prep Time: <x:out select="$recipeXML/recipe/prepTime"/> mins</li>
+        <li>Cook Time: <x:out select="$recipeXML/recipe/cookTime"/> mins</li>
+        <li><x:out select="$recipeXML/recipe/yield"/></li>
     </ul>
+    <table id="nutrition-detail">
+        <thead>
+        <th>Kcal</th>
+        <th>Proteins</th>
+        <th>Carbs</th>
+        <th>Fiber</th>
+        <th>Fat</th>
+        </thead>
+        <tr>
+            <td><x:out select="$recipeXML/recipe/nutrition/calories"/></td>
+            <td><x:out select="$recipeXML/recipe/nutrition/protein"/></td>
+            <td><x:out select="$recipeXML/recipe/nutrition/carbs"/></td>
+            <td><x:out select="$recipeXML/recipe/nutrition/fiber"/></td>
+            <td><x:out select="$recipeXML/recipe/nutrition/fat"/></td>
+        </tr>
+    </table>
     <div class="ingredients-layout">
+        <h2 style="margin-left: 10px;">Ingredients</h2>
         <ul class="ingredients">
-            <c:forEach items="${RecipeDTO.ingredients}" var="ingredient">
-                <li>${ingredient.content}</li>
-            </c:forEach>
+            <x:forEach select="$recipeXML/recipe/ingredients/ingredient" var="ingredient">
+                <li><x:out select="$ingredient"/></li>
+            </x:forEach>
         </ul>
     </div>
     <div class="methods-layout">
+        <h2>Methods</h2>
         <ul>
-            <c:forEach items="${RecipeDTO.methods}" var="method">
+            <x:forEach select="$recipeXML/recipe/methods/method"  var="method">
                 <li>
-                    <b>Step ${method.step}:</b>
-                    <p>${method.content}</p>
+                    <b>Step <x:out select="step"/></b>
+                    <p><x:out select="content"/></p>
                 </li>
-            </c:forEach>
+            </x:forEach>
         </ul>
     </div>
 </div>

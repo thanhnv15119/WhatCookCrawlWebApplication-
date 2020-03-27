@@ -1,6 +1,9 @@
 package entity;
 
+import jaxb.IngredientsType;
+import jaxb.MethodsType;
 import jaxb.RecipeTitleDTO;
+import jaxb.RecipeType;
 
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -19,6 +22,7 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Entity
 @NamedQueries({

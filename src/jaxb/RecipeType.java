@@ -60,7 +60,9 @@ public class RecipeType {
     protected IngredientsType ingredients;
     @XmlElement(required = true)
     protected MethodsType methods;
+    @XmlElement(required = true)
     protected int prepTime;
+    @XmlElement(required = true)
     protected int cookTime;
 
     /**
